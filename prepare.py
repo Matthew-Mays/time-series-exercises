@@ -22,3 +22,24 @@ def add_columns(df):
     df['day_of_week'] = df.index.weekday
     return df
 
+def g_weather_dtformat(df):
+    df.Date = pd.to_datetime(df.Date)
+    return df
+
+def g_weather_pairplot(df):
+    sns.pairplot(df)
+
+def g_weather_reindex(df):
+    df = df.set_index('Date').sort_index()
+    return df
+
+def g_weather_new_cols(df):
+    df['month'] = df.index.month
+    df['year'] = df.index.year
+    return df
+
+def g_weather_missing(df):
+    df.Wind = df.Wind.fillna(df.Wind.mean())
+    df.Solar = df.Solar.fillna(df.Solar.mean())
+    df['Wind+Solar'] = df['Wind+Solar'].fillna(df.Wind + df.Solar)
+    return df
